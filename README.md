@@ -23,8 +23,18 @@ Este es un juego interactivo del ahorcado implementado en Python. El objetivo de
 
 ## Autor
 
-Desarrollado por Neythan Sabogal Gaitan(https://github.com/Sabogal22).
+Desarrollado por [Tu nombre o alias](https://github.com/tuusuario).
 
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+## Futuros Cambios
+
+- **Pistas**: Implementa la opción de dar pistas al jugador, como la longitud de la palabra o algunas letras reveladas.
+- **Contador de puntos**: Lleva un contador de puntos para cada partida y muestra el puntaje final al finalizar el juego.
+- **Más niveles de dificultad**: Crea niveles personalizados con diferentes cantidades de intentos o palabras más largas.
+- **Agregar sonidos**: Incorpora efectos de sonido para darle más inmersión al juego.
+- **Guardar récords**: Mantén un registro de los récords de los jugadores, como la cantidad mínima de intentos necesarios para adivinar una palabra en cada nivel.
+- **Opciones de personalización**: Permite al jugador personalizar aspectos del juego, como el color del fondo, la apariencia del ahorcado, etc.
+- **Traducciones**: Agrega soporte para múltiples idiomas para llegar a una audiencia más amplia.
