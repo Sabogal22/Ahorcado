@@ -1,131 +1,66 @@
 import random
 
-def seleccionar_palabra(nivel):
-    palabras = {
-        "facil": ["python", "programacion", "computadora", "juego"],
-        "medio": ["ahorcado", "aprender", "desarrollo", "codigo"],
-        "dificil": ["inteligencia", "artificial", "algoritmo", "complejidad"]
-    }
-    return random.choice(palabras[nivel])
-
-def mostrar_tablero(palabra, letras_correctas):
-    palabra_mostrada = ""
-    for letra in palabra:
-        if letra in letras_correctas:
-            palabra_mostrada += letra + " "
+def display_word(word, guessed_letters):
+    displayed_word = ''
+    for letter in word:
+        if letter in guessed_letters:
+            displayed_word += letter + ' '
         else:
-            palabra_mostrada += "_ "
-    print(palabra_mostrada)
+            displayed_word += '_ '
+    return displayed_word
 
-def dibujar_ahorcado(intentos_restantes):
-    partes_ahorcado = [
-        """
-           ------
-           |    |
-           |    
-           |    
-           |    
-           |
-        --------
-        """,
-        """
-           ------
-           |    |
-           |    O
-           |    
-           |    
-           |
-        --------
-        """,
-        """
-           ------
-           |    |
-           |    O
-           |    |
-           |    
-           |
-        --------
-        """,
-        """
-           ------
-           |    |
-           |    O
-           |   /|
-           |    
-           |
-        --------
-        """,
-        """
-           ------
-           |    |
-           |    O
-           |   /|\\
-           |    
-           |
-        --------
-        """,
-        """
-           ------
-           |    |
-           |    O
-           |   /|\\
-           |   / 
-           |
-        --------
-        """,
-        """
-           ------
-           |    |
-           |    O
-           |   /|\\
-           |   / \\
-           |
-        --------
-        """
-    ]
-    print(partes_ahorcado[6 - intentos_restantes])
-
-def jugar():
-    nivel = input("Selecciona un nivel (fácil, medio, difícil): ").lower()
-    if nivel not in ["facil", "medio", "dificil"]:
-        print("Nivel no válido. Seleccionando nivel fácil por defecto.")
-        nivel = "facil"
+def hangman():
+    print("Bienvenido al juego del ahorcado!")
     
-    palabra_secreta = seleccionar_palabra(nivel)
-    letras_correctas = []
-    intentos_restantes = 6
+    # Pedir al usuario que ingrese una palabra
+    word = input("Ingresa la palabra para que alguien más la adivine: ").lower()
+    # Limpiar la pantalla
+    print("\n" * 50)
     
-    print("¡Bienvenido al juego del ahorcado!")
-    print("Adivina la palabra secreta.")
-    mostrar_tablero(palabra_secreta, letras_correctas)
+    # Lista de letras ya adivinadas
+    guessed_letters = []
     
-    while intentos_restantes > 0:
-        intento = input("Introduce una letra: ").lower()
+    # Número máximo de intentos
+    max_attempts = 6
+    attempts = 0
+    
+    while attempts < max_attempts:
+        # Mostrar la palabra oculta con las letras adivinadas
+        print(display_word(word, guessed_letters))
         
-        if len(intento) != 1 or not intento.isalpha():
-            print("Por favor, introduce una única letra válida.")
+        # Mostrar el número de intentos restantes
+        print("Intentos restantes:", max_attempts - attempts)
+        
+        # Pedir al usuario que ingrese una letra
+        guess = input("Adivina una letra: ").lower()
+        
+        # Validar que la entrada sea una sola letra
+        if len(guess) != 1:
+            print("Por favor, ingresa solo una letra.")
             continue
         
-        if intento in letras_correctas:
-            print("Ya has intentado esa letra. Intenta con otra.")
+        # Si la letra ya fue adivinada
+        if guess in guessed_letters:
+            print("Ya has adivinado esa letra. ¡Intenta con otra!")
             continue
         
-        if intento in palabra_secreta:
-            letras_correctas.append(intento)
+        # Añadir la letra a la lista de letras adivinadas
+        guessed_letters.append(guess)
+        
+        # Si la letra no está en la palabra
+        if guess not in word:
+            print("¡Incorrecto!")
+            attempts += 1
+        else:
             print("¡Correcto!")
-        else:
-            intentos_restantes -= 1
-            print("Incorrecto. Te quedan {} intentos.".format(intentos_restantes))
         
-        dibujar_ahorcado(intentos_restantes)
-        mostrar_tablero(palabra_secreta, letras_correctas)
-        
-        if all(letra in letras_correctas for letra in palabra_secreta):
-            print("¡Felicidades! ¡Has adivinado la palabra secreta: {}!".format(palabra_secreta))
+        # Verificar si se ha adivinado toda la palabra
+        if display_word(word, guessed_letters).replace(' ', '') == word:
+            print("¡Felicidades! ¡Has adivinado la palabra correctamente!")
             break
     
-    if intentos_restantes == 0:
-        print("¡Oh no! Te has quedado sin intentos. La palabra secreta era: {}.".format(palabra_secreta))
+    if attempts == max_attempts:
+        print("Lo siento, has agotado todos tus intentos. La palabra era:", word)
 
-if __name__ == "__main__":
-    jugar()
+# Ejecutar el juego
+hangman()
