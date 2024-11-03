@@ -21,9 +21,9 @@ Este es un juego interactivo del ahorcado implementado en Python. El objetivo de
 
 ¡Las contribuciones son bienvenidas! Si tienes ideas para mejorar el juego, por favor abre un problema o envía una solicitud de extracción.
 
-## Autor
+## SABOGAL22
 
-Desarrollado por [Tu nombre o alias](https://github.com/tuusuario).
+Desarrollado por [Tu nombre o alias](https://github.com/Sabogal22).
 
 ## Licencia
 
